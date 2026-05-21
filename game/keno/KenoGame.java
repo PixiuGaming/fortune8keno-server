@@ -69,7 +69,8 @@ public class KenoGame {
         return playerNumbers;
     }
 
-    public double playGame(int stake, Random random) {
+    public SpinResponse playGame(int stake, Random random) {
+        SpinResponse spinResponse = new SpinResponse();
         getServerDrawnNumbers(random);
         getPlayerNumbers(random);
         lastServerNum = getLastServerNum();
@@ -92,7 +93,10 @@ public class KenoGame {
         } else {
             System.out.println("Sorry, you only matched " + matchedNumbers.size() + " numbers: " + matchedNumbers);
         }
-        return winningAmount * multiplier;
+        spinResponse.setWinAmount(winningAmount * multiplier);
+        spinResponse.setNumberOfSpots(playerNumbers.size());
+        spinResponse.setMatchedNumbersCount(matchedNumbers.size());
+        return spinResponse;
 
     }
 
